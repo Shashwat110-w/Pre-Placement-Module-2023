@@ -1,0 +1,86 @@
+#include<iostream>
+using namespace std;
+
+class Node
+{
+    public:
+    int data;
+    Node *next;
+};
+
+void deleteEnd(Node** head){
+    Node* tempNode = *head;
+    Node* previous;
+    
+    // Can't delete from empty Linked List
+    if(*head == NULL){
+        cout << ("\nEmpty List, can't delete"); 
+        return; 
+    } 
+
+    // if Linked List has only 1 node 
+    if(tempNode->next == NULL){
+        cout << "\nValue Deleted: " << (*head)->data;
+        *head = NULL;
+        return;
+    }
+    
+    // else traverse to the last node
+    while (tempNode->next != NULL) 
+    {
+        // store previous link node as we need to change its next val
+        previous = tempNode; 
+        tempNode = tempNode->next; 
+    }
+    
+    // Curr assign 2nd last node's next to Null
+    previous->next = NULL;
+    
+    cout << "\nValue Deleted: " << tempNode->data;
+    // delete the last node
+    free(tempNode);
+    // 2nd last now becomes the last node
+}
+
+void insert(Node** head, int data){
+
+    Node* newNode = new Node();
+    
+    newNode->data = data;
+    newNode->next = *head;
+
+    // assigned head to newNode
+    *head = newNode;
+}
+
+void display(Node* temp){
+    cout << "\nLinked List: ";
+
+    //as linked list will end when Node is Null
+    while(temp!=NULL){
+        cout << temp->data << " "; 
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
+int main(){
+    Node* head = NULL;
+    
+    insert(&head,4);
+    insert(&head,5);
+    insert(&head,6);
+    insert(&head,7);
+    insert(&head,8);
+    insert(&head,9);
+    insert(&head,10);
+
+    display(head);
+    
+    deleteEnd(&head);
+    deleteEnd(&head);
+    deleteEnd(&head);
+    display(head);
+    
+    return 0;  
+}
