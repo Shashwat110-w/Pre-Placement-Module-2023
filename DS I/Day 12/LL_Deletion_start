@@ -1,0 +1,50 @@
+#include <iostream>
+using namespace std;
+
+class Node
+{
+    public:
+    int data;
+    Node *next;
+};
+
+void insertStart(Node** head, int data){
+
+    Node* new_node = new Node();
+
+    // assign data value
+    new_node->data = data;
+    // change the next node of this new_node 
+    // to current head of Linked List
+    new_node->next = *head;
+
+    //changing the new head to this newly entered node
+    *head = new_node;
+
+}
+void display(Node* node){
+
+    //as linked list will end when Node is Null
+    while(node!=NULL){
+        cout << node->data << " "; node = node->next;
+    }
+    cout << endl;
+}
+
+int main(){
+
+    Node* head = NULL;
+
+    insertStart(&head,10);
+    insertStart(&head,11);
+    insertStart(&head,12);
+    insertStart(&head,13);
+    insertStart(&head,14);
+    insertStart(&head,15);
+    insertStart(&head,16);
+    insertStart(&head,17);
+    insertStart(&head,18);
+
+    display(head); 
+    return 0;  
+}
